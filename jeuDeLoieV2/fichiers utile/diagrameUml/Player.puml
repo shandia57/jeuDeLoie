@@ -1,0 +1,23 @@
+class Player {
+    #id : int
+    #username : string;
+    #role : string;
+    #points = 0;
+    #maxPoints = 49;
+    #players : array;
+    #maxPlayers = 6;
+    #currentIndexPlayer = 0;
+    #numberOfActuelPlayers : int;
+    #statePlaying : bool;
+
+    constructor(username, role) 
+
+    +resetPoints()
+    +resetAllPoints()
+    +getCurrentPlayer()
+    +setNumberOfActuelPlayers(number)
+    +getNumberOfActuelPlayers()
+    +controlPointsOfTheCurrentPlayer()
+    +setStatePlaying()
+    +getStatePlaying()
+}

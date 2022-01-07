@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/framework/vendor/twbs/bootstrap" />
+      <path value="$PROJECT_DIR$/framework/vendor/nikic/fast-route" />
+      <path value="$PROJECT_DIR$/framework/vendor/composer" />
+      <path value="$PROJECT_DIR$/framework/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/framework/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/framework/vendor/twig/twig" />
+    </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.0">
+    <option name="suggestChangeDefaultLanguageLevel" value="false" />
+  </component>
+</project>

@@ -1,0 +1,100 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	Home page
+{% endblock %}
+
+{% block css %}
+    {{ parent() }}  
+    <link rel="stylesheet" type="text/css" href="assets/style/buttonCreateGame.css">
+    <link rel="stylesheet" type="text/css" href="assets/style/homePage.css">
+{% endblock %}
+
+{% block content %}
+	<main>
+
+		<h1>Bienvenue sur la page d'accueil</h1>
+
+		{% for singleUser in users %}
+		<input type="hidden" name="users" value="{{singleUser.username}}">
+		{% endfor %}
+
+		{% if  not user %}
+			<p>Veuillez vous connecter ou vous inscrire pour démarrer une partie</p>
+		{% else %}
+			<div class="mb-3">
+				<label for="exampleInputEmail1" class="form-label">Username</label>
+				<div id="selectUserAndColor">
+					<div>
+						<input id="searchUser" class="form-control" type="text" autocomplete="off" >
+					</div>
+					<div>
+						<select id="selectColor" class="form-select" aria-label="Default select example">
+							<option value="default">Choisir une couleur</option>
+							<option id="red" value="red" style="background-color: red"></option>
+							<option id="blue" value="blue" style="background-color: blue"></option>
+							<option id="gren" value="green" style="background-color: green"></option>
+							<option id="yellow" value="yellow" style="background-color: yellow"></option>
+							<option id="orange" value="orange" style="background-color: orange"></option>
+							<option id="pink" value="pink" style="background-color: pink"></option>
+						</select>
+					</div>
+					<div>
+						<button id="addUser" type="button" class="btn btn-outline-success">Ajouter cet utilisateur</button>
+					</div>
+				</div>
+				<ul id="userList" class="list-group list-group-flush">
+				</ul>
+			</div>
+
+			<ul id="listPlayers">
+			</ul>
+
+			<form method="post" action="/game?player=GameMaster">
+				<div id="usersHidden"></div>
+				<button id="createTheGame" class="glow-on-hover" type="button">Créer une partie</button>
+			</form>
+		{% endif %}
+
+
+	</main>
+
+        
+    {# Modal Connexion #}
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Connexion</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form method="post">
+						<div class="mb-3">
+							<label class="form-label">Username</label>
+							<input type="text" class="form-control " name="username">
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Mot de passe</label>
+							<input type="password" class="form-control" name="password">
+						</div>
+						<div class="mb-3 form-check">
+							<input type="checkbox" class="form-check-input" id="exampleCheck1" name="checkbox">
+							<label class="form-check-label" for="exampleCheck1">Rester connecté</label>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+							<button type="submit" class="btn btn-outline-info" name="connect">Connexion</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+		<script type="text/javascript" src="assets/script/scripts/homePage.js"></script>	
+	
+{% endblock %}
+
+
+
+

@@ -1,0 +1,92 @@
+{% extends "base.html.twig" %}
+
+{% block bootstrap %}
+	{{ parent() }}
+{% endblock %}
+{% block fontawesome %}
+	{{ parent() }}
+{% endblock %}
+{% block css %}
+	{{ parent() }}
+{% endblock %}
+
+
+{% block body %}
+
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				{% if not user %}
+					<span class="navbar-brand">
+						<b>User</b>
+					</span>
+				{% else %}
+					<span class="navbar-brand">
+						<b>Bonjour
+							{{ user }}</b>
+					</span>
+				{% endif %}
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+					<ul class="navbar-nav">
+						<li>
+							<a class="nav-link active" href="/">Home</a>
+						</li>
+
+						{% if not user %}
+
+							{% else %}
+
+								{% if user_roles == "ROLES_ADMIN" %}
+									<li class="nav-item position-relative marginRight">
+										<a class="nav-link  " href="/users">Users
+											<span class="spanBadge badge rounded-pill bg-danger">{{nbrUsers}}</span>
+										</a>
+									</li>
+									<li>
+										<a class="nav-link  position-relative" href="/questions">Questions
+											<span class="spanBadge badge rounded-pill bg-danger">{{nbrQuestions}}</span>
+										</a>
+									</li>
+
+								{% endif %}
+						{% endif %}
+					</ul>
+				</div>
+				{% if not user %}
+					<div class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="subscribe">S'inscrire</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link active" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Connexion</a>
+						</li>
+					</div>
+				{% else %}
+					{# A alterner les commentaires pour tester le logout #}
+
+					<form method="POST">
+						<button id="logout" type='button' class='btn btn-outline-danger' name="logout">Déconnexion</button>
+					</form>
+
+					{# <a href="/" class='btn btn-outline-danger' name="logout">Logout</a> #}
+
+				{% endif %}
+			</div>
+		</nav>
+
+	</header>
+    <input id="anyErrors" value="{{anyErrors}}" type="hidden"></input>
+
+
+    {% block content  %} {% endblock %}
+        {% block javascript %}
+            {{ parent() }}  
+        {% endblock %}
+{% endblock %}
+

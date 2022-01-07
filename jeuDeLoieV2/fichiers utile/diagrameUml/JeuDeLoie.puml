@@ -1,0 +1,18 @@
+class JeuDeLoie{
+    #endGameWithNumberPlayer = 1;
+
+    #answers : array;
+    #questionsLevel1 : array;
+    #questionsLevel2 : array;
+    #questionsLevel3 : array;
+    #questionsLevel4 : array;
+    #questionsLevel5 : array;
+    #questionsLevel6 : array;
+
+    +getSingleQuestion(index, arrayQuestions)
+    +removeSingleQuestion(index, arrayQuestions)
+    +getRandomIndex(max)
+    +getQuestionsWithLevel(levelQuestion)
+    +getNumberPointsToAttribute(levelQuestion)
+    +removeTheQuestion(levelQuestion, index)
+}

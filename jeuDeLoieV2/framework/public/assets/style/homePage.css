@@ -1,0 +1,12 @@
+#selectUserAndColor div{
+    display: inline-block;
+}
+.list-group-item{
+    cursor: pointer;
+}
+.list-group-item:hover{
+    background-color: lightgray;
+}
+ul{
+    list-style: none;
+}

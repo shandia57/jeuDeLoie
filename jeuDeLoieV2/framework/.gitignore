@@ -1,0 +1,4 @@
+vendor
+config/*.local.php
+config/*.conf.php
+config/app.conf.php

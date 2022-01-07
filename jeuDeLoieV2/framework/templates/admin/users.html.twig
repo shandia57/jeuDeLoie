@@ -1,0 +1,182 @@
+{% extends "layout.html.twig" %}
+
+
+{% block css %} 
+    {{ parent() }}  
+    <link rel="stylesheet" type="text/css" href="assets/style/user.css">
+{% endblock %}
+
+
+{% block title %}Users{% endblock %}
+
+{% block content %}
+    <main>
+        <h1>Users</h1>
+
+            <button type="button" class="btn btn-outline-success"  data-bs-toggle="modal" data-bs-target="#modalSubscribe">Ajouter un nouvel utilisateur</button>
+
+
+            <div class="filter">
+                <div class="input-group mb-3">
+                    <input type="text" id="searchbar" class="form-control" placeholder="username">
+                    <button class="btn btn-outline-secondary" type="button" id="buttonSearch"><i
+                            class="fas fa-search"></i></button>
+                </div>
+
+                <select id="selectFilter" class="form-select">
+                    <option selected value="ascendant">ID : ascendant</option>
+                    <option value="descendant">ID : descendant</option>
+                    <option value="az">Username:  A - Z</option>
+                    <option value="za">Username:  Z - A</option>
+                </select>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#ID</th>
+                        <th scope="col">username</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Adresse mail</th>
+                        <th scope="col">Roles</th>
+                        <th scope="col"></th>
+                        
+                    </tr>
+                </thead>
+                
+                <tbody id="tbody">
+                        {% for user in users %}
+                            <tr class="dataTr">
+                                <td scope="row">{{user.id_user}} </td>
+                                <td name="username">{{user.username}}</td>
+                                <td>{{user.firstName}}</td>
+                                <td>{{user.lastName}}</td>
+                                <td>{{user.mail}}</td>
+                                <td>{{user.roles}}</td>
+                                <td><button type="button" class="btn btn-outline-info dataUser" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setInfoUser(this)">Modifier</button></td>
+                            </tr>
+                        {% endfor %}
+                </tbody>
+            </table>
+            
+
+    </main>
+
+     <!-- Modal update / delete --> 
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="usernameTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="formTest" method="post" action="users">
+
+                    <div class="modal-body">
+                    <input name="id_user"  id="id_user" type="hidden">
+
+                    <label for="firstName" class="form-label" >Prénom</label>
+                    <input id="firstName" class="form-control" name="firstName" type="text" required>
+                    <div class="form-text">{{firstName}}</div>
+
+                    <label for="lastName" class="form-label">Nom</label>
+                    <input id="lastName" class="form-control" name="lastName" type="text" required>
+                    <div class="form-text">{{lastName}}</div>
+
+                    <label for="mail" class="form-label">Adresse mail</label>
+                    <input id="mail" class="form-control" name="mail" type="text" required>
+                    <div class="form-text">{{mail}}</div>
+
+                    <label for="inputPassword5" class="form-label">Roles</label>
+                    <select id="roles" class="form-select" aria-label="Default select example" name="roles">
+                        <option id="role1"  selected value="ROLES_ADMIN">ROLES_ADMIN</option>
+                        <option id="role2" value="ROLES_USER">ROLES_USER</option>
+                    </select>
+                    <div class="form-text">{{roles}}</div>
+                </div>
+
+
+                <div class="position-relative">
+                    <hr>
+                    <div id="containerBtn">
+                        <button type="button" id="btnDelete" class="btn btn-danger " data-bs-dismiss="modal" name="delete">Supprimer</button>
+                        <button type="submit" id="btnModifier" class="btn btn-primary" name="update">Modifier</button>
+                    </div>
+                </div>
+                
+
+
+                
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal new inscription -->
+    <div class="modal fade" id="modalSubscribe" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Inscription d'un nouvel utilisateur</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post" action="users">
+                    <div class="modal-body">
+                        <label for="usernameSub" class="form-label">Username</label>
+                        <input  id="usernameSub" class="form-control" type="text" name="username" required>
+                        <div class="form-text">{{username}}</div>
+
+                        <label for="passwordSub" class="form-label">Mot de passe</label>
+                        <input  id="passwordSub" class="form-control" type="password" name="password" required>
+                        <div class="form-text">{{password}}</div>
+
+                        <label for="passwordConfSub" class="form-label">Confirmation du mot de passe</label>
+                        <input  id="passwordConfSub" class="form-control" type="password" name="passwordConfirm" required>
+                        <div class="form-text">{{passwordConfirm}}</div>
+
+                        <label for="firstNameSub" class="form-label">Prénom</label>
+                        <input  id="firstNameSub" class="form-control" type="text" name="firstName" required>
+                        <div class="form-text">{{firstName}}</div>
+
+                        <label for="lastNameSub" class="form-label">Nom</label>
+                        <input  id="lastNameSub" class="form-control" type="text" name="lastName" required>
+                        <div class="form-text">{{lastName}}</div>
+
+                        <label for="mailSub" class="form-label">Adresse mail</label>
+                        <input  id="mailSub" class="form-control" type="text" name="mail" required>
+                        <div class="form-text">{{mail}}</div>
+                        
+                        <select id="rolesSub" class="form-select" aria-label="Default select example" name="roles">
+                            <option id="role1Sub"  selected value="ROLES_ADMIN">ROLES_ADMIN</option>
+                            <option id="role2Sub" value="ROLES_USER">ROLES_USER</option>
+                        </select>
+                        <div class="form-text">{{roles}}</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" name="insert">Ajouter cet utilisateur</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    {% endblock %}
+
+    {% block javascript %}
+        {{ parent() }} 
+        <script type="text/javascript" src="assets/script/scripts/users.js"></script>
+        <script type="module" src="assets/script/modules/users/users.js"></script>
+    {% endblock %}
+
+
+
+
+
+
+
+
+    
